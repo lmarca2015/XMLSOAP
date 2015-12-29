@@ -1,0 +1,52 @@
+commit f2f179b8e4c35c2b5a1d5ad39be925ebe8ef2801
+Author: Luis Marca <luisfmz26@gmail.com>
+Date:   Tue Dec 29 11:52:44 2015 -0500
+
+    add SERVICE RECARGAS
+
+ .../UserInterfaceState.xcuserstate                 | Bin 13264 -> 13253 bytes
+ Soap1/ViewController.m                             |  26 ++++++++++++++-------
+ 2 files changed, 18 insertions(+), 8 deletions(-)
+
+commit 6e5a676e2e41aa7185a461f2e37e49a9f5bfadfe
+Author: Luis Marca <luisfmz26@gmail.com>
+Date:   Tue Dec 29 11:50:09 2015 -0500
+
+    add SERVICIO TRANSFERENCIA
+
+ .../UserInterfaceState.xcuserstate                 | Bin 13188 -> 13264 bytes
+ Soap1/ViewController.m                             |  22 ++++++++++++++++-----
+ 2 files changed, 17 insertions(+), 5 deletions(-)
+
+commit d0dd7e4f526597511818202e6bb1a6f9d2fccef2
+Author: Luis Marca <luisfmz26@gmail.com>
+Date:   Tue Dec 29 11:45:51 2015 -0500
+
+    add service PAGOS
+
+ .../UserInterfaceState.xcuserstate                 | Bin 13424 -> 13188 bytes
+ Soap1/ViewController.m                             |  24 +++++++++++----------
+ 2 files changed, 13 insertions(+), 11 deletions(-)
+
+commit e3a7881ec1f4f6f08364b59fa7ae6e677dd9f045
+Author: Luis Marca <luisfmz26@gmail.com>
+Date:   Tue Dec 29 11:41:00 2015 -0500
+
+    first commit
+
+ Soap1.xcodeproj/project.pbxproj                    | 305 +++++++++++++++++++++
+ .../project.xcworkspace/contents.xcworkspacedata   |   7 +
+ .../UserInterfaceState.xcuserstate                 | Bin 0 -> 13424 bytes
+ .../xcdebugger/Breakpoints_v2.xcbkptlist           |   5 +
+ .../Admin.xcuserdatad/xcschemes/Soap1.xcscheme     |  91 ++++++
+ .../xcschemes/xcschememanagement.plist             |  22 ++
+ Soap1/AppDelegate.h                                |  17 ++
+ Soap1/AppDelegate.m                                |  45 +++
+ .../AppIcon.appiconset/Contents.json               |  38 +++
+ Soap1/Base.lproj/LaunchScreen.storyboard           |  27 ++
+ Soap1/Base.lproj/Main.storyboard                   |  25 ++
+ Soap1/Info.plist                                   |  45 +++
+ Soap1/ViewController.h                             |  15 +
+ Soap1/ViewController.m                             | 143 ++++++++++
+ Soap1/main.m                                       |  16 ++
+ 15 files changed, 801 insertions(+)

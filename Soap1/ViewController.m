@@ -13,10 +13,12 @@
 #define TAG_TRANSFERENCIA @"TransferenciaResult"
 #define TAG_RECARGAS @"RecargaResult"
 
+
 #define SERVICE_AFILIACION @"http://tempuri.org/IService/Afiliacion"
 #define SERVICE_PAGOS @"http://tempuri.org/IService/Pagos"
 #define SERVICE_TRANSFERENCIA @"http://tempuri.org/IService/Transferencia"
 #define SERVICE_RECARGA @"http://tempuri.org/IService/Recarga"
+
 
 @interface ViewController () <NSURLConnectionDelegate,NSXMLParserDelegate>
 @property NSString *soapMessage;
@@ -30,7 +32,6 @@
 @implementation ViewController
 
 @synthesize soapMessage, webResponseData, currentElement, soapResultsPortFolio, elementFoundPortFolio;
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,7 +89,18 @@
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [envelope dataUsingEncoding:NSUTF8StringEncoding]];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSURLConnection *connection = [[NSURLConnection alloc]
+                                   initWithRequest:request delegate:self];
+    /*
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:url
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+            }] resume];
+    */
+    
     if (connection)
         webResponseData = NSMutableData.data;
     // Do any additional setup after loading the view, typically from a nib.
@@ -109,10 +121,11 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"Received %lu bytes", (unsigned long)webResponseData.length);
     
-    NSXMLParser* xmlParse = [[NSXMLParser alloc] initWithData:webResponseData];
+    NSXMLParser *xmlParse = [[NSXMLParser alloc] initWithData:webResponseData];
     [xmlParse setDelegate:self];
     [xmlParse setShouldResolveExternalEntities:YES];
     [xmlParse parse];
+    
     /*
     NSString *response = [[NSString alloc] initWithData:webResponseData encoding:NSUTF8StringEncoding];
     NSLog(@"Response: %@", response);*/
