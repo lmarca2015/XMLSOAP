@@ -10,9 +10,12 @@
 
 #define TAG_DATA @"AfiliacionResult"
 #define TAG_PAGOS @"PagosResult"
+#define TAG_TRANSFERENCIA @"TransferenciaResult"
+
 
 #define SERVICE_AFILIACION @"http://tempuri.org/IService/Afiliacion"
 #define SERVICE_PAGOS @"http://tempuri.org/IService/Pagos"
+#define SERVICE_TRANSFERENCIA @"http://tempuri.org/IService/Transferencia"
 
 
 @interface ViewController () <NSURLConnectionDelegate,NSXMLParserDelegate>
@@ -43,6 +46,7 @@
     "]]>";
     */
     
+    /*
     NSString *soap = @"<![CDATA[\n"
     "<Pagos>\n"
     "<Data>\n"
@@ -50,10 +54,18 @@
     "</Data>\n"
     "</Pagos>\n"
     "]]>";
+    */
     
+    NSString *soap = @"<![CDATA[\n"
+    "<Transferencia>\n"
+    "<Data>\n"
+    "Monto=100.00|Cuenta=12345678900|Tarjeta=5549110920049586|Pin=123\n"
+    "</Data>\n"
+    "</Transferencia>\n"
+    "]]>";
     
     //TODO: Cambiar el tipo de operacion..
-    NSString *envelope = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ns1=\"http://tempuri.org/\"><SOAP-ENV:Body><ns1:Pagos><ns1:xml>%@</ns1:xml></ns1:Pagos></SOAP-ENV:Body></SOAP-ENV:Envelope>",soap];
+    NSString *envelope = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ns1=\"http://tempuri.org/\"><SOAP-ENV:Body><ns1:Transferencia><ns1:xml>%@</ns1:xml></ns1:Transferencia></SOAP-ENV:Body></SOAP-ENV:Envelope>",soap];
 
     
     NSString *envelopeLength = [NSString stringWithFormat:@"%lu", (unsigned long)envelope.length];
@@ -62,7 +74,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request addValue:@"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [request addValue:envelopeLength forHTTPHeaderField:@"Content-Length"];
-    [request addValue:SERVICE_PAGOS forHTTPHeaderField:@"SOAPAction"];
+    [request addValue:SERVICE_TRANSFERENCIA forHTTPHeaderField:@"SOAPAction"];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [envelope dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -98,7 +110,7 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
     //NSLog(@"%@",elementName);
-    if( [elementName isEqualToString:TAG_PAGOS])
+    if( [elementName isEqualToString:TAG_TRANSFERENCIA])
     {
         if (!soapResultsPortFolio)
         {
@@ -110,7 +122,7 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
     //NSLog(@"%@",string);
-    if ([ViewController listMatches:@"PAGO" stringT:string]) {
+    if ([ViewController listMatches:@"AGENTE MULTIRED" stringT:string]) {
         if (elementFoundPortFolio)
         {
             [soapResultsPortFolio appendString: string];
@@ -119,7 +131,7 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-    if ([elementName isEqualToString:TAG_PAGOS])
+    if ([elementName isEqualToString:TAG_TRANSFERENCIA])
     {
         NSLog(@"didEndElement ->%@",soapResultsPortFolio);
         elementFoundPortFolio = false;
