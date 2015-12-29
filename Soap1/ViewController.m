@@ -9,7 +9,7 @@
 #import "ViewController.h"
 
 #define TAG_DATA @"AfiliacionResult"
-#define TAG_PAGOS @""
+#define TAG_PAGOS @"PagosResult"
 
 #define SERVICE_AFILIACION @"http://tempuri.org/IService/Afiliacion"
 #define SERVICE_PAGOS @"http://tempuri.org/IService/Pagos"
@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    /*
     NSString *soap = @"<![CDATA[\n"
     "<Afiliacion>\n"
     "<Data>\n"
@@ -41,9 +41,9 @@
     "</Data>\n"
     "</Afiliacion>\n"
     "]]>";
+    */
     
-    
-    NSString *pagos = @"<![CDATA[\n"
+    NSString *soap = @"<![CDATA[\n"
     "<Pagos>\n"
     "<Data>\n"
     "Servicio=Sedapal|TipoOperador=Sedapal|NroServicio=123456789|FechaDeuda=20151120|Monto=100.00\n"
@@ -52,7 +52,9 @@
     "]]>";
     
     
-    NSString *envelope = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ns1=\"http://tempuri.org/\"><SOAP-ENV:Body><ns1:Afiliacion><ns1:xml>%@</ns1:xml></ns1:Afiliacion></SOAP-ENV:Body></SOAP-ENV:Envelope>",soap];
+    //TODO: Cambiar el tipo de operacion..
+    NSString *envelope = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ns1=\"http://tempuri.org/\"><SOAP-ENV:Body><ns1:Pagos><ns1:xml>%@</ns1:xml></ns1:Pagos></SOAP-ENV:Body></SOAP-ENV:Envelope>",soap];
+
     
     NSString *envelopeLength = [NSString stringWithFormat:@"%lu", (unsigned long)envelope.length];
     
@@ -60,7 +62,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request addValue:@"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [request addValue:envelopeLength forHTTPHeaderField:@"Content-Length"];
-    [request addValue:SERVICE_AFILIACION forHTTPHeaderField:@"SOAPAction"];
+    [request addValue:SERVICE_PAGOS forHTTPHeaderField:@"SOAPAction"];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [envelope dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -95,8 +97,8 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
-    
-    if( [elementName isEqualToString:TAG_DATA])
+    //NSLog(@"%@",elementName);
+    if( [elementName isEqualToString:TAG_PAGOS])
     {
         if (!soapResultsPortFolio)
         {
@@ -108,7 +110,7 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
     //NSLog(@"%@",string);
-    if ([ViewController listMatches:@"AFILIACION" stringT:string]) {
+    if ([ViewController listMatches:@"PAGO" stringT:string]) {
         if (elementFoundPortFolio)
         {
             [soapResultsPortFolio appendString: string];
@@ -117,9 +119,9 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-    if ([elementName isEqualToString:TAG_DATA])
+    if ([elementName isEqualToString:TAG_PAGOS])
     {
-        NSLog(@"%@",soapResultsPortFolio);
+        NSLog(@"didEndElement ->%@",soapResultsPortFolio);
         elementFoundPortFolio = false;
     }
 }
