@@ -91,14 +91,14 @@
     
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:request delegate:self];
+
     /*
     NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:url
-            completionHandler:^(NSData *data,
-                                NSURLResponse *response,
-                                NSError *error) {
-                // handle response
-            }] resume];
+    [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data,
+                                                     NSURLResponse * _Nullable response,
+                                                     NSError * _Nullable error) {
+        //hanfle response.
+    }];
     */
     
     if (connection)
