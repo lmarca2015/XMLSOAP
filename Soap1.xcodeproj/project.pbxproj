@@ -298,6 +298,7 @@
 				84FEA6E41C32E0B10012730D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

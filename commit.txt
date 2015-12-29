@@ -1,3 +1,35 @@
+commit 80c561af7e0efcd981da5bd98f5561be32c08571
+Author: Luis Marca <luisfmz26@gmail.com>
+Date:   Tue Dec 29 15:32:50 2015 -0500
+
+    ultimos cambios
+
+ .../UserInterfaceState.xcuserstate                 | Bin 14410 -> 18172 bytes
+ Soap1/Base.lproj/Main.storyboard                   |  25 ++++++++++++++++++---
+ Soap1/ViewController.h                             |   1 +
+ Soap1/ViewController.m                             |   7 +++---
+ 4 files changed, 27 insertions(+), 6 deletions(-)
+
+commit b1f422c58004d6f59a626df29fbdf9041ac27b56
+Author: Luis Marca <luisfmz26@gmail.com>
+Date:   Tue Dec 29 14:02:45 2015 -0500
+
+    cambios ok
+
+ .../UserInterfaceState.xcuserstate                  | Bin 14419 -> 14410 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 03481bcad908d32ffe57e50063561486dd430b31
+Author: Luis Marca <luisfmz26@gmail.com>
+Date:   Tue Dec 29 12:36:25 2015 -0500
+
+    add file commit.txt
+
+ .../UserInterfaceState.xcuserstate                 | Bin 13253 -> 14419 bytes
+ Soap1/ViewController.m                             |  19 ++++++--
+ commit.txt                                         |  52 +++++++++++++++++++++
+ 3 files changed, 68 insertions(+), 3 deletions(-)
+
 commit f2f179b8e4c35c2b5a1d5ad39be925ebe8ef2801
 Author: Luis Marca <luisfmz26@gmail.com>
 Date:   Tue Dec 29 11:52:44 2015 -0500
