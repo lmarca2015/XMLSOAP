@@ -126,9 +126,9 @@
     [xmlParse setShouldResolveExternalEntities:YES];
     [xmlParse parse];
     
-    
+    /*
     NSString *response = [[NSString alloc] initWithData:webResponseData encoding:NSUTF8StringEncoding];
-    NSLog(@"Response: %@", response);
+    NSLog(@"Response: %@", response);*/
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
