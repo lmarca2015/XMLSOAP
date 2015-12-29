@@ -126,9 +126,9 @@
     [xmlParse setShouldResolveExternalEntities:YES];
     [xmlParse parse];
     
-    /*
+    
     NSString *response = [[NSString alloc] initWithData:webResponseData encoding:NSUTF8StringEncoding];
-    NSLog(@"Response: %@", response);*/
+    NSLog(@"Response: %@", response);
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
@@ -156,7 +156,8 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     if ([elementName isEqualToString:TAG_RECARGAS])
     {
-        NSLog(@"didEndElement ->%@",soapResultsPortFolio);
+        //NSLog(@"didEndElement ->%@",soapResultsPortFolio);
+        self.textView.text = soapResultsPortFolio;
         elementFoundPortFolio = false;
     }
 }
